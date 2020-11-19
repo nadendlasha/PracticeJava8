@@ -1,0 +1,30 @@
+package com.example;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Arrays;
+
+public class BadExam {
+
+	public static void main(String as[]) {
+		int[] marks = { 10, 20, 30, 40, 50, 60, 70, 80, 90 };
+		//int[] marks = {10,20,0,100};
+		//int[] marks = {40,80,60};
+		Arrays.sort(marks, 0, marks.length);
+		System.out.println(newAverage(marks));
+	}
+	public static double newAverage(int[] marks) {
+		int n = marks.length;
+		BigDecimal sum = new BigDecimal(0);
+		for (int i = 0; i < n; i++) {
+			BigDecimal bg1, bg2, bg3, bg4;
+			bg1 = new BigDecimal(marks[i]);
+			bg2 = new BigDecimal(marks[n - 1]);
+			bg4 = new BigDecimal(100);
+			bg3 = bg1.divide(bg2, 2, RoundingMode.HALF_EVEN);
+			BigDecimal multiply = bg3.multiply(bg4);
+			sum = sum.add(new BigDecimal(multiply.intValue()));
+		}
+		return  sum.divide(new BigDecimal(n),1, RoundingMode.FLOOR).doubleValue();
+	}
+}
